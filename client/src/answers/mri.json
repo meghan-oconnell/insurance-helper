@@ -1,0 +1,64 @@
+{
+  "id": "mri",
+  "title": "My doctor ordered an MRI and I need to schedule it",
+  "plan": {
+    "id": "kp-dc-silver-3500-2026",
+    "name": "KP DC Silver 3500 Ded/1200 RxDed/Vision",
+    "year": 2026
+  },
+  "generatedAt": "2026-10-17T17:32:19.735Z",
+  "status": "ready-for-review",
+  "notice": "Listed benefits are not a personal bill estimate. Confirm arrangements and additional services with Kaiser.",
+  "steps": [
+    {
+      "id": "arrange-ordered-test-1",
+      "sourceIds": [],
+      "who": "The clinician or care team that ordered your test",
+      "say": "Where should I get my ordered test? Is the order on file at that location, and is the location a plan provider?",
+      "why": "Confirm the order and location before scheduling.",
+      "when": "Before scheduling the test"
+    },
+    {
+      "id": "arrange-ordered-test-2",
+      "sourceIds": [],
+      "who": "The ordering care team",
+      "say": "Does this particular test need prior authorization? If so, who handles it and has it been approved? Are there any preparation instructions?",
+      "why": "Confirm any approval and preparation requirements for the specific test.",
+      "when": "Before the test"
+    },
+    {
+      "id": "explain-service-cost-1",
+      "sourceIds": [
+        "imaging-cost",
+        "deductible-applies"
+      ],
+      "who": "Kaiser Member Services or the provider billing team",
+      "say": "Can you confirm these benefits apply to my planned visit or service with this provider, and whether any additional services will be billed?",
+      "why": "For a plan provider: 30% coinsurance for imaging (CT/PET scans, MRIs) from a plan provider. Not covered from a non-plan provider. Deductible rule: The 30% applies after you meet your deductible ($3,500 individual / $7,000 family). Until then, you generally pay the full cost.",
+      "when": "Before the appointment or service"
+    },
+    {
+      "id": "request-personal-estimate-1",
+      "sourceIds": [],
+      "who": "Kaiser Member Services or the imaging billing team",
+      "say": "Can I get an estimate for my ordered MRI at this location using my remaining deductible? Does the estimate include all charges, including interpretation?",
+      "why": "A coinsurance percentage alone does not establish your personal dollar cost.",
+      "when": "Before the MRI"
+    }
+  ],
+  "unknowns": [],
+  "sources": [
+    {
+      "id": "imaging-cost",
+      "document": "KP_DC_Silver_3500.pdf",
+      "page": 2,
+      "quote": "Imaging (CT/PET 30% coinsurance"
+    },
+    {
+      "id": "deductible-applies",
+      "document": "KP_DC_Silver_3500.pdf",
+      "page": 2,
+      "quote": "All copayment and coinsurance costs shown in this chart are after your deductible has been met, if a deductible applies."
+    }
+  ]
+}

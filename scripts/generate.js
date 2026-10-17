@@ -76,7 +76,7 @@ The frontend should display:
   const CONFIG = {
     scenarios: "data/scenarios.json",
     templates: "data/templates.json",
-    plan: "data/plan.txt",
+    plan: "data/plans/kp-dc-silver-3500-2026.js",
     model: "lib/model.js",
     verifier: "lib/verify.js",
     modelExport: "askModel",
@@ -209,8 +209,7 @@ The frontend should display:
     ? [scenarios.get(args[0])]
     : [...scenarios.values()];
 
-  const planModule = await loadModule(CONFIG.plan);
-  const plan = planModule.default ?? planModule.plan;
+  const plan = (await loadModule(CONFIG.plan)).default;
 
   if (
     !isObject(plan) ||
@@ -314,11 +313,8 @@ ${JSON.stringify(facts)}
     return parsed.slots;
   }
 
-  // Adapt this function if Meghan's verifier uses different arguments
-  // or returns a different shape. Never treat a Promise as a boolean.
-  async function passesVerification(input) {
-    const result = await verifySlot(input);
-    return result?.valid === true;
+  async function passesVerification({ candidate }) {
+    return verifySlot(candidate.quote) === true;
   }
 
   function isEligibleFact(fact) {
