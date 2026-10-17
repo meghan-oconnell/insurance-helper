@@ -1,33 +1,22 @@
-# Welcome
+# Care, step by step
 
-#### React + Vite
+**Insurance without the headache.** A tool that explains, in plain language, what to do
+and what you'll pay when you need care, grounded in your actual health plan document.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Insurance jargon keeps people from getting care. This is built especially for people with
+disabilities and executive-function challenges: one action per step, the exact words to
+say, and every answer traced back to the plan.
 
-Currently, two official plugins are available:
+## What it does today
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Pick a situation (like "My doctor ordered an MRI") and get step-by-step guidance:
+  **who to contact, what to say, why it matters, and when.**
+- Every plan-specific fact is **checked against the real plan document** and shows the
+  page it came from.
+- "How I got this answer" shows the exact quotes from the plan behind each answer.
+- Anything the plan doesn't state goes in a **"Confirm with Kaiser"** section with a
+  question to ask, never a guess.
+- **Demo plan:** 2026 KP DC Silver 3500 (Kaiser Permanente, DC). The MRI scenario is fully
+  verified; the other scenarios are marked **Preview** and show the general process.
 
-### React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-### Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-
-## Setup:
-
-## Later:
-
-- live model generation:
-  - make generation code reusable
-  - put Express server between page and model
-  - use Vite proxy to connect the page
-
-- Free response questions
-
-- more plans
-
-- cross check wit more than one model
+## How it works
