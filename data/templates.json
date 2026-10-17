@@ -1,0 +1,105 @@
+[
+  {
+    "id": "arrange-primary-care",
+    "steps": [
+      {
+        "who": "Your primary care team, or Kaiser Member Services if you need help finding one",
+        "say": "I want an appointment about a health concern. How do I arrange a visit with a plan provider?",
+        "why": "Confirm the appropriate appointment and provider for your concern.",
+        "when": "When arranging care"
+      }
+    ]
+  },
+  {
+    "id": "confirm-preventive-care",
+    "steps": [
+      {
+        "who": "Your primary care team",
+        "say": "I want a preventive checkup. Which planned services qualify as preventive under my plan? Could any other services have a separate charge?",
+        "why": "Confirm how the planned services will be billed; not everything provided during a checkup is necessarily preventive.",
+        "when": "Before your appointment"
+      }
+    ]
+  },
+  {
+    "id": "arrange-mental-health",
+    "steps": [
+      {
+        "who": "Kaiser Member Services or the mental health scheduling team",
+        "say": "I want to start outpatient mental health therapy. How do I schedule an initial visit with a plan provider, and is any referral needed for this service?",
+        "why": "Ask for the correct access route rather than assuming the general specialist referral rule applies.",
+        "when": "When arranging care"
+      },
+      {
+        "who": "The mental health scheduling team",
+        "say": "Will this be an individual or group therapy visit, and what charges apply to that appointment?",
+        "why": "Confirm the appointment type before using its benefit amount.",
+        "when": "Before your appointment"
+      }
+    ]
+  },
+  {
+    "id": "check-specialist-referral",
+    "steps": [
+      {
+        "who": "Your primary care team or Kaiser Member Services",
+        "say": "For the specialty I need, can I book directly or do I need a referral? If a referral is needed, who arranges it?",
+        "why": "The plan states: {referral_rule}",
+        "when": "Before arranging the specialist visit",
+        "fallbackSay": "For the specialty I need, do I need a referral or can I book directly? Who can help me arrange it?"
+      }
+    ]
+  },
+  {
+    "id": "explain-service-cost",
+    "steps": [
+      {
+        "who": "Kaiser Member Services or the provider billing team",
+        "say": "Can you confirm these benefits apply to my planned visit or service with this provider, and whether any additional services will be billed?",
+        "why": "For a plan provider: {service_cost} Deductible rule: {deductible_rule}",
+        "when": "Before the appointment or service",
+        "fallbackSay": "What would I pay for this specific service with this provider? Does my deductible apply, and could there be separate charges?"
+      }
+    ]
+  },
+  {
+    "id": "arrange-ordered-test",
+    "steps": [
+      {
+        "who": "The clinician or care team that ordered your test",
+        "say": "Where should I get my ordered test? Is the order on file at that location, and is the location a plan provider?",
+        "why": "Confirm the order and location before scheduling.",
+        "when": "Before scheduling the test"
+      },
+      {
+        "who": "The ordering care team",
+        "say": "Does this particular test need prior authorization? If so, who handles it and has it been approved? Are there any preparation instructions?",
+        "why": "Confirm any approval and preparation requirements for the specific test.",
+        "when": "Before the test"
+      }
+    ]
+  },
+  {
+    "id": "request-personal-estimate",
+    "steps": [
+      {
+        "who": "Kaiser Member Services or the imaging billing team",
+        "say": "Can I get an estimate for my ordered MRI at this location using my remaining deductible? Does the estimate include all charges, including interpretation?",
+        "why": "A coinsurance percentage alone does not establish your personal dollar cost.",
+        "when": "Before the MRI"
+      }
+    ]
+  },
+  {
+    "id": "confirm-lab-cost",
+    "steps": [
+      {
+        "who": "The ordering care team or laboratory billing team",
+        "say": "Are my ordered blood tests being billed as diagnostic tests or covered preventive services? Can you confirm the applicable benefit and any additional charges?",
+        "why": "The diagnostic lab benefit for a plan provider is: {service_cost} Deductible rule: {deductible_rule}",
+        "when": "Before the blood draw",
+        "fallbackSay": "Are these blood tests diagnostic or covered preventive services? What would I pay at this laboratory, and does my deductible apply?"
+      }
+    ]
+  }
+]

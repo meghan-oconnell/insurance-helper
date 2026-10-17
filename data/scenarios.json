@@ -1,0 +1,69 @@
+[
+  {
+    "id": "primary-care",
+    "title": "I want to see a doctor about a health concern",
+    "rows": [
+      "Primary care visit to treat an injury or illness"
+    ],
+    "templates": [
+      "arrange-primary-care",
+      "explain-service-cost"
+    ]
+  },
+  {
+    "id": "preventive-care",
+    "title": "I want to schedule a preventive checkup",
+    "rows": [
+      "Preventive care/screening/immunization"
+    ],
+    "templates": [
+      "confirm-preventive-care",
+      "explain-service-cost"
+    ]
+  },
+  {
+    "id": "mental-health",
+    "title": "I want to start seeing a mental health therapist",
+    "rows": [
+      "Outpatient services"
+    ],
+    "templates": [
+      "arrange-mental-health",
+      "explain-service-cost"
+    ]
+  },
+  {
+    "id": "specialist",
+    "title": "I want to see a specialist, like a dermatologist",
+    "rows": [
+      "Specialist visit"
+    ],
+    "templates": [
+      "check-specialist-referral",
+      "explain-service-cost"
+    ]
+  },
+  {
+    "id": "mri",
+    "title": "My doctor ordered an MRI and I need to schedule it",
+    "rows": [
+      "Imaging (CT/PET scans, MRI's)"
+    ],
+    "templates": [
+      "arrange-ordered-test",
+      "explain-service-cost",
+      "request-personal-estimate"
+    ]
+  },
+  {
+    "id": "lab-work",
+    "title": "My doctor ordered blood work",
+    "rows": [
+      "Diagnostic test (x-ray, blood work)"
+    ],
+    "templates": [
+      "arrange-ordered-test",
+      "confirm-lab-cost"
+    ]
+  }
+]
