@@ -18,5 +18,3 @@ say, and every answer traced back to the plan.
   question to ask, never a guess.
 - **Demo plan:** 2026 KP DC Silver 3500 (Kaiser Permanente, DC). The MRI scenario is fully
   verified; the other scenarios are marked **Preview** and show the general process.
-
-## How it works
