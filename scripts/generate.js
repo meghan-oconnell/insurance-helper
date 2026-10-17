@@ -76,11 +76,11 @@ The frontend should display:
   const CONFIG = {
     scenarios: "data/scenarios.json",
     templates: "data/templates.json",
-    plan: "data/plan.js",
+    plan: "data/plan.txt",
     model: "lib/model.js",
     verifier: "lib/verify.js",
     modelExport: "askModel",
-    verifierExport: "verifySlot",
+    verifierExport: "isVerified",
     output: "client/src/answers",
   };
 
@@ -91,11 +91,7 @@ The frontend should display:
   }
 
   function isObject(value) {
-    return (
-      value !== null &&
-      typeof value === "object" &&
-      !Array.isArray(value)
-    );
+    return value !== null && typeof value === "object" && !Array.isArray(value);
   }
 
   function isText(value) {
@@ -137,23 +133,15 @@ The frontend should display:
 
   function slotsIn(step) {
     const slots = STEP_FIELDS.flatMap((field) =>
-      [...step[field].matchAll(/\{([a-z_]+)\}/g)].map(
-        (match) => match[1]
-      )
+      [...step[field].matchAll(/\{([a-z_]+)\}/g)].map((match) => match[1]),
     );
 
     return [...new Set(slots)];
   }
 
-  const scenarios = indexById(
-    await readJSON(CONFIG.scenarios),
-    "scenario"
-  );
+  const scenarios = indexById(await readJSON(CONFIG.scenarios), "scenario");
 
-  const templates = indexById(
-    await readJSON(CONFIG.templates),
-    "template"
-  );
+  const templates = indexById(await readJSON(CONFIG.templates), "template");
 
   // Validate templates before contacting the model.
   for (const template of templates.values()) {
@@ -191,7 +179,7 @@ The frontend should display:
     for (const templateId of scenario.templates) {
       if (!templates.has(templateId)) {
         fail(
-          `Scenario "${scenario.id}" references missing template "${templateId}".`
+          `Scenario "${scenario.id}" references missing template "${templateId}".`,
         );
       }
     }
@@ -205,10 +193,10 @@ The frontend should display:
 
   if (args[0] === "--check") {
     console.log(
-      `OK: ${scenarios.size} scenarios and ${templates.size} templates.`
+      `OK: ${scenarios.size} scenarios and ${templates.size} templates.`,
     );
     console.log(
-      "This checks file structure only, not plan accuracy or Ollama integration."
+      "This checks file structure only, not plan accuracy or Ollama integration.",
     );
     return;
   }
@@ -232,7 +220,7 @@ The frontend should display:
     !isObject(plan.factsByScenario)
   ) {
     fail(
-      "Plan data does not match the structure documented at the top of generate.js."
+      "Plan data does not match the structure documented at the top of generate.js.",
     );
   }
 
@@ -360,7 +348,7 @@ ${JSON.stringify(facts)}
       templates.get(templateId).steps.map((step, index) => ({
         ...step,
         id: `${templateId}-${index + 1}`,
-      }))
+      })),
     );
 
     const requiredSlots = [...new Set(steps.flatMap(slotsIn))];
@@ -368,7 +356,7 @@ ${JSON.stringify(facts)}
     const eligibleFacts = Object.fromEntries(
       requiredSlots
         .filter((slot) => isEligibleFact(facts[slot]))
-        .map((slot) => [slot, facts[slot]])
+        .map((slot) => [slot, facts[slot]]),
     );
 
     const candidates = Object.keys(eligibleFacts).length
@@ -412,17 +400,14 @@ ${JSON.stringify(facts)}
 
     for (const step of steps) {
       const usedSlots = slotsIn(step);
-      const missingSlots = usedSlots.filter(
-        (slot) => !accepted[slot]
-      );
+      const missingSlots = usedSlots.filter((slot) => !accepted[slot]);
 
       if (missingSlots.length) {
         // Do not display partially filled claims.
         unknowns.push({
           stepId: step.id,
           fields: missingSlots,
-          reason:
-            "Plan information was missing or did not pass verification.",
+          reason: "Plan information was missing or did not pass verification.",
           who: step.who,
           say: step.fallbackSay,
           when: step.when,
@@ -439,7 +424,7 @@ ${JSON.stringify(facts)}
       for (const field of STEP_FIELDS) {
         filledStep[field] = step[field].replace(
           /\{([a-z_]+)\}/g,
-          (_, slot) => accepted[slot].value
+          (_, slot) => accepted[slot].value,
         );
       }
 
@@ -448,8 +433,7 @@ ${JSON.stringify(facts)}
 
         if (
           sources.has(source.id) &&
-          JSON.stringify(sources.get(source.id)) !==
-            JSON.stringify(source)
+          JSON.stringify(sources.get(source.id)) !== JSON.stringify(source)
         ) {
           fail(`Conflicting source ID: ${source.id}`);
         }
@@ -473,9 +457,7 @@ ${JSON.stringify(facts)}
         year: plan.year,
       },
       generatedAt: new Date().toISOString(),
-      status: unknowns.length
-        ? "needs-confirmation"
-        : "ready-for-review",
+      status: unknowns.length ? "needs-confirmation" : "ready-for-review",
       notice:
         "Listed benefits are not a personal bill estimate. " +
         "Confirm arrangements and additional services with Kaiser.",
@@ -489,19 +471,14 @@ ${JSON.stringify(facts)}
   await fs.mkdir(CONFIG.output, { recursive: true });
 
   for (const answer of answers) {
-    const destination = path.join(
-      CONFIG.output,
-      `${answer.id}.json`
-    );
+    const destination = path.join(CONFIG.output, `${answer.id}.json`);
 
     const temporary = `${destination}.${process.pid}.tmp`;
 
     try {
-      await fs.writeFile(
-        temporary,
-        JSON.stringify(answer, null, 2) + "\n",
-        { flag: "wx" }
-      );
+      await fs.writeFile(temporary, JSON.stringify(answer, null, 2) + "\n", {
+        flag: "wx",
+      });
 
       await fs.rename(temporary, destination);
     } finally {
@@ -510,7 +487,7 @@ ${JSON.stringify(facts)}
 
     console.log(
       `Saved ${answer.id}: ${answer.steps.length} steps, ` +
-      `${answer.unknowns.length} items to confirm.`
+        `${answer.unknowns.length} items to confirm.`,
     );
   }
 })().catch((error) => {
